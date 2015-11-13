@@ -25,11 +25,12 @@ def parse_options_data(table):
     rows = table[0].findall('.//tr')
     header = _unpack(rows[0])
     data = [_unpack(r) for r in rows[1:]]
-    return TextParser(data, names=header).get_chunk()
+    data_clean = [data[i].strip() for i in data]
+    return TextParser(data_clean, names=header).get_chunk()
 
 #Create pandas DataFrame with all the info
 final = parse_options_data(table)
-print final
+print(final)
 
 #Export DataFrame to CSV, excluding columns we don't care about.
 #final.to_csv('albums.csv', index=False)
