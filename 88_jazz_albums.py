@@ -17,7 +17,9 @@ table = doc.findall(".//table[@id='dgrdTop88list']")
 #Function to grab the info from each row of the table.
 def _unpack(row):
     elts = row.findall('.//td')
-    return [val.text_content() for val in elts]
+    vals = [val.text_content() for val in elts]
+    vals_clean = [vals[i].strip() for i in range(len(vals))]
+    return vals_clean
 
 #Function to organize the table data in a pandas DataFrame-friendly way.
 #Has previous function nested within.
@@ -25,15 +27,13 @@ def parse_options_data(table):
     rows = table[0].findall('.//tr')
     header = _unpack(rows[0])
     data = [_unpack(r) for r in rows[1:]]
-    data_clean = [data[i].strip() for i in data]
-    return TextParser(data_clean, names=header).get_chunk()
+    return TextParser(data, names=header).get_chunk()
 
 #Create pandas DataFrame with all the info
 final = parse_options_data(table)
-print(final)
 
 #Export DataFrame to CSV, excluding columns we don't care about.
-#final.to_csv('albums.csv', index=False)
+final.to_csv('albums.csv', index=False)
 
 #Notify user of completeion.
-#print("Albums written to CSV.")
+print("Albums written to CSV.")
