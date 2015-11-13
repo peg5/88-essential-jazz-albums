@@ -31,7 +31,7 @@ def parse_options_data(table):
 final = parse_options_data(table)
 
 #Export DataFrame to CSV, excluding columns we don't care about.
-final.to_csv('albums.csv', index=False, cols = ['ARTIST', 'DISC TITLE', 'YEAR'])
+final.to_csv('albums.csv', index=False)
 
 #Notify user of completeion.
 print("Albums written to CSV.")
