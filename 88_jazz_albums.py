@@ -22,7 +22,7 @@ def _unpack(row, kind='td'):
 #Function to organize the table data in a pandas DataFrame-friendly way.
 #Has previous function nested within.
 def parse_options_data(table):
-    rows = table.findall('.//tr')
+    rows = table[0].findall('.//tr')
     header = _unpack(rows[0], kind = 'tr')
     data = [_unpack(r) for r in rows[1:]]
     return TextParser(data, names=header).get_chunk()
@@ -31,7 +31,7 @@ def parse_options_data(table):
 final = parse_options_data(table)
 
 #Export DataFrame to CSV, excluding columns we don't care about.
-final.to_csv('albums.csv', index=False, cols = ['Artist', 'Disc Title', 'Year'])
+final.to_csv('albums.csv', index=False, cols = ['ARTIST', 'DISC TITLE', 'YEAR'])
 
 #Notify user of completeion.
 print("Albums written to CSV.")
