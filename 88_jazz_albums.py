@@ -15,15 +15,15 @@ doc = parsed.getroot()
 table = doc.findall(".//table[@id='dgrdTop88list']")
 
 #Function to grab the info from each row of the table.
-def _unpack(row, kind='td'):
-    elts = row.findall('.//%s' % kind)
+def _unpack(row):
+    elts = row.findall('.//td')
     return [val.text_content() for val in elts]
 
 #Function to organize the table data in a pandas DataFrame-friendly way.
 #Has previous function nested within.
 def parse_options_data(table):
     rows = table[0].findall('.//tr')
-    header = _unpack(rows[0], kind = 'tr')
+    header = _unpack(rows[0])
     data = [_unpack(r) for r in rows[1:]]
     return TextParser(data, names=header).get_chunk()
 
