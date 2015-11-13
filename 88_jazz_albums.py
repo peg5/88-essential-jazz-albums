@@ -29,9 +29,10 @@ def parse_options_data(table):
 
 #Create pandas DataFrame with all the info
 final = parse_options_data(table)
+print final
 
 #Export DataFrame to CSV, excluding columns we don't care about.
-final.to_csv('albums.csv', index=False)
+#final.to_csv('albums.csv', index=False)
 
 #Notify user of completeion.
-print("Albums written to CSV.")
+#print("Albums written to CSV.")
