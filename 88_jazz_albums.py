@@ -5,7 +5,11 @@ from lxml.html import parse
 from pandas.io.parsers import TextParser
 from pandas import DataFrame
 
+#TODO: Replace export to csv with export to MongoDB
+#import pymongo
+
 URL = "http://www.jazzandblues.org/programming/top88/index.aspx"
+#con = pymongo.Connection('localhost', port=27017)
 
 #Open the website and gather all the HTML info.
 parsed = parse(urlopen(URL))
